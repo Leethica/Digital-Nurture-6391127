@@ -1,4 +1,4 @@
-package com.example.demospringweb;
+package com.example.helloworldrest;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class HelloController {
 
-    @GetMapping("/")
+    @GetMapping("/hello")
     public String hello() {
-        return "Welcome to Spring Boot Web App!";
+        return "Hello World";
     }
 }
