@@ -1,4 +1,4 @@
-package com.example.countryapi;
+package com.example.countrywebservice;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -10,23 +10,17 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class CountryController {
 
-    private static final Map<String, String> countries = new HashMap<>();
+    private static final Map<String, Country> countries = new HashMap<>();
 
     static {
-        countries.put("in", "India");
-        countries.put("us", "United States");
-        countries.put("uk", "United Kingdom");
-        countries.put("jp", "Japan");
-        countries.put("fr", "France");
+        countries.put("in", new Country("in", "India"));
+        countries.put("us", new Country("us", "United States"));
+        countries.put("uk", new Country("uk", "United Kingdom"));
+        countries.put("jp", new Country("jp", "Japan"));
     }
 
     @GetMapping("/countries/{code}")
-    public String getCountryByCode(@PathVariable String code) {
-        String country = countries.get(code.toLowerCase());
-        if (country != null) {
-            return country;
-        } else {
-            return "Country code not found!";
-        }
+    public Country getCountry(@PathVariable String code) {
+        return countries.getOrDefault(code.toLowerCase(), new Country("NA", "Country not found"));
     }
 }
