@@ -1,9 +1,16 @@
 import React from 'react';
+import './App.css';
+import Home from './components/Home';
+import About from './components/About';
+import Contact from './components/Contact';
 
-const App=()=> {
+function App() {
   return (
-    <div>
-      <h1>Welcome to the first session of React</h1>
+    <div className="App">
+      <h1>Student Management Portal</h1>
+      <Home />
+      <About />
+      <Contact />
     </div>
   );
 }
