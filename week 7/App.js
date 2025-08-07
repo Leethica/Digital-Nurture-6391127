@@ -1,57 +1,70 @@
-import React, { useState } from 'react';
-import CurrencyConvertor from './CurrencyConvertor';
+// src/App.js
+import React from 'react';
+import './App.css';
 
 function App() {
-  const [count, setCount] = useState(0);
-
-  const increment = () => {
-    setCount(prev => prev + 1);
-    sayHello();
-    showMessage();
+  // Object for a single office
+  const singleOffice = {
+    name: 'WorkHub Space',
+    rent: 55000,
+    address: '123, Tech Park, Chennai'
   };
 
-  const sayHello = () => {
-    console.log('Hello!');
-  };
+  // List of multiple offices
+  const officeList = [
+    { name: 'TechSpace One', rent: 45000, address: 'Anna Nagar, Chennai' },
+    { name: 'InnovateHub', rent: 65000, address: 'Tidel Park, Chennai' },
+    { name: 'Startup Arena', rent: 58000, address: 'Guindy, Chennai' },
+    { name: 'Corporate Corner', rent: 70000, address: 'OMR, Chennai' }
+  ];
 
-  const showMessage = () => {
-    console.log('You clicked the increment button!');
-  };
-
-  const sayWelcome = (msg) => {
-    alert(msg);
-  };
-
-  const handleClick = (e) => {
-    e.preventDefault();
-    alert('I was clicked!');
+  // Inline style logic for rent color
+  const getRentStyle = (rent) => {
+    return {
+      color: rent < 60000 ? 'red' : 'green',
+      fontWeight: 'bold'
+    };
   };
 
   return (
-    <div className="App" style={{ padding: '20px', fontFamily: 'Arial' }}>
-      <h1>🧪 React Event Handling Demo</h1>
+    <div className="App" style={{ fontFamily: 'Arial', padding: '20px' }}>
+      {/* Heading using JSX */}
+      <h1>🏢 Office Space Rental App</h1>
 
-      <h2>Counter: {count}</h2>
-      <button onClick={increment}>Increment</button>
-      <button onClick={() => setCount(prev => prev - 1)}>Decrement</button>
+      {/* Image with JSX attributes */}
+      <img
+        src="https://images.unsplash.com/photo-1570129477492-45c003edd2be"
+        alt="Office Space"
+        style={{ width: '400px', height: '250px', borderRadius: '10px', marginBottom: '20px' }}
+      />
+
+      {/* Display a single object */}
+      <h2>Featured Office</h2>
+      <p><strong>Name:</strong> {singleOffice.name}</p>
+      <p><strong>Address:</strong> {singleOffice.address}</p>
+      <p>
+        <strong>Rent:</strong>{' '}
+        <span style={getRentStyle(singleOffice.rent)}>{singleOffice.rent}</span>
+      </p>
 
       <hr />
 
-      <button onClick={() => sayWelcome('Welcome to React Events!')}>
-        Say Welcome
-      </button>
-
-      <hr />
-
-      <button onClick={handleClick}>OnPress (Synthetic Event)</button>
-
-      <hr />
-
-      <CurrencyConvertor />
+      {/* Looping through a list of office objects */}
+      <h2>All Office Spaces</h2>
+      <ul>
+        {officeList.map((office, index) => (
+          <li key={index} style={{ marginBottom: '15px' }}>
+            <p><strong>Name:</strong> {office.name}</p>
+            <p><strong>Address:</strong> {office.address}</p>
+            <p>
+              <strong>Rent:</strong>{' '}
+              <span style={getRentStyle(office.rent)}>{office.rent}</span>
+            </p>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
 
 export default App;
-
-
